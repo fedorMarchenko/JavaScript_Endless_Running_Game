@@ -133,6 +133,7 @@ window.addEventListener('load', function() {
         game.update(deltaTime)
         game.draw(ctx)
         console.log(game.input.keys)
+        //why
         if (!game.gameOver)
             requestAnimationFrame(animate)
     }
