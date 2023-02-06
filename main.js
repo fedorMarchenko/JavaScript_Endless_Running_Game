@@ -42,8 +42,8 @@ window.addEventListener('load', function() {
         }
         update(deltaTime) {
             this.time += deltaTime
-            if (this.time > this.maxTime)
-                this.gameOver = true
+            // if (this.time > this.maxTime)
+            //     this.gameOver = true
             this.background.update()
             this.player.update(this.input.keys, deltaTime)
             // handleEnemies
@@ -104,6 +104,7 @@ window.addEventListener('load', function() {
             this.speed = 0
             this.background.restart()
             this.player.restart()
+            this.input.keys = []
             this.enemies = []
             this.particles = []
             this.collisions = []
@@ -132,8 +133,7 @@ window.addEventListener('load', function() {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         game.update(deltaTime)
         game.draw(ctx)
-        console.log(game.input.keys)
-        //why
+        console.log(deltaTime)
         if (!game.gameOver)
             requestAnimationFrame(animate)
     }
