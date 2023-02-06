@@ -5,6 +5,8 @@ import { FloatingMessage } from './floatingMessages.js'
 export default class Player {
     constructor(game) {
         this.game = game
+        this.frameWidth = 200
+        this.frameHeight = 200
         this.width = 100
         this.height = 91.3
         this.x = 0
@@ -54,10 +56,10 @@ export default class Player {
         // sprite animation
         if (this.frameTimer > this.frameInterval) {
             this.frameTimer = 0
-            if (this.frameX < this.maxFrame)
-                this.frameX++
+            if (this.frameX > 0)
+                this.frameX--
             else
-                this.frameX = 0
+                this.frameX = this.maxFrame
         } else
             this.frameTimer += deltaTime
         // energy
@@ -85,7 +87,7 @@ export default class Player {
         if (this.game.debug) {
             context.strokeRect(this.x, this.y, this.width, this.height)
         }
-        context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height)
+        context.drawImage(this.image, this.frameX * this.frameWidth, this.frameY * this.frameHeight, this.frameWidth, this.frameHeight, this.x, this.y, this.width, this.height)
     }
     onGround() {
         return this.y >= this.game.height - this.height - this.game.groundMargin

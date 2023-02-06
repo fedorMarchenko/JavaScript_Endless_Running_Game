@@ -22,9 +22,9 @@ export class Sitting extends State {
         super('SITTING', game)
     }
     enter() {
-        this.game.player.frameX = 0
-        this.game.player.frameY = 5
-        this.game.player.maxFrame = 4
+        this.game.player.frameY = 3
+        this.game.player.maxFrame = 3
+        this.game.player.frameX = this.game.player.maxFrame
     }
     handleInput(input) {
         if (input.includes('a') || input.includes('d')) {
@@ -40,9 +40,9 @@ export class Running extends State {
         super('RUNNING', game)
     }
     enter() {
-        this.game.player.frameX = 0
-        this.game.player.frameY = 3
-        this.game.player.maxFrame = 8
+        this.game.player.frameY = 0
+        this.game.player.maxFrame = 5
+        this.game.player.frameX = this.game.player.maxFrame
     }
     handleInput(input) {
         this.game.particles.push(new Dust(this.game, this.game.player.x + this.game.player.width * 0.5, this.game.player.y + this.game.player.height))
@@ -61,12 +61,12 @@ export class Jumping extends State {
         super('JUMPING', game)
     }
     enter() {
-        this.game.player.frameX = 0
         if (this.game.player.onGround()) {
             this.game.player.vy -= 27
         }
-        this.game.player.frameY = 1
-        this.game.player.maxFrame = 6
+        this.game.player.frameY = 5
+        this.game.player.maxFrame = 1
+        this.game.player.frameX = this.game.player.maxFrame
     }
     handleInput(input) {
         if (this.game.player.vy > this.game.player.weight) {
@@ -84,9 +84,9 @@ export class Falling extends State {
         super('FALLING', game)
     }
     enter() {
-        this.game.player.frameX = 0
-        this.game.player.frameY = 2
-        this.game.player.maxFrame = 6
+        this.game.player.frameY = 4
+        this.game.player.maxFrame = 1
+        this.game.player.frameX = this.game.player.maxFrame
     }
     handleInput(input) {
         if (this.game.player.onGround()) {
@@ -104,9 +104,9 @@ export class Rolling extends State {
         super('ROLLING', game)
     }
     enter() {
-        this.game.player.frameX = 0
-        this.game.player.frameY = 6
-        this.game.player.maxFrame = 6
+        this.game.player.frameY = 1
+        this.game.player.maxFrame = 7
+        this.game.player.frameX = this.game.player.maxFrame
     }
     handleInput(input) {
         this.game.particles.push(new Fire(this.game, this.game.player.x + this.game.player.width * 0.5, this.game.player.y + this.game.player.height * 0.5))
@@ -127,9 +127,9 @@ export class Diving extends State {
         super('DIVING', game)
     }
     enter() {
-        this.game.player.frameX = 0
-        this.game.player.frameY = 6
-        this.game.player.maxFrame = 6
+        this.game.player.frameY = 1
+        this.game.player.maxFrame = 7
+        this.game.player.frameX = this.game.player.maxFrame
         this.game.player.vy = 15
     }
     handleInput(input) {
@@ -149,14 +149,14 @@ export class Hit extends State {
         super('HIT', game)
     }
     enter() {
-        this.game.player.frameX = 0
-        this.game.player.frameY = 4
-        this.game.player.maxFrame = 10
+        this.game.player.frameY = 2
+        this.game.player.maxFrame = 11
+        this.game.player.frameX = this.game.player.maxFrame
     }
     handleInput(input) {
-        if (this.game.player.frameX >= 10 && this.game.player.onGround()) {
+        if (this.game.player.frameX <= 0 && this.game.player.onGround()) {
             this.game.player.setState(states.RUNNING, 1)
-        } else if (this.game.player.frameX >= 10 && !this.game.player.onGround()) {
+        } else if (this.game.player.frameX <= 0 && !this.game.player.onGround()) {
             this.game.player.setState(states.FALLING, 1)
         }
     }
